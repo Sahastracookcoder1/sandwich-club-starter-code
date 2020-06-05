@@ -26,21 +26,21 @@ public class JsonUtils {
         if (json != null){
             try{
                 JSONObject sandwichJson = new JSONObject(json);
-                JSONObject ObjectForName = sandwichJson.getJSONObject("name");
+                JSONObject ObjectForName = sandwichJson.optJSONObject("name");
 
-                mainName = ObjectForName.getString("mainName");
-                placeOfOrigin = sandwichJson.getString("placeOfOrigin");
-                description = sandwichJson.getString("description");
-                image = sandwichJson.getString("image");
+                mainName = ObjectForName.optString("mainName");
+                placeOfOrigin = sandwichJson.optString("placeOfOrigin");
+                description = sandwichJson.optString("description");
+                image = sandwichJson.optString("image");
                 //take JSONarray and return list for ingredients and alsoKnownAs
-                JSONArray alsoKnownAs = ObjectForName.getJSONArray("alsoKnownAs");
+                JSONArray alsoKnownAs = ObjectForName.optJSONArray("alsoKnownAs");
                 for (int i = 0; i < alsoKnownAs.length(); i++){
-                    List_for_alsoKnownAs.add(alsoKnownAs.getString(i));
+                    List_for_alsoKnownAs.add(alsoKnownAs.optString(i));
                 }
 
-                JSONArray ingredients = sandwichJson.getJSONArray("ingredients");
+                JSONArray ingredients = sandwichJson.optJSONArray("ingredients");
                 for (int i = 0; i < ingredients.length(); i++){
-                    List_for_ingredients.add(ingredients.getString(i));
+                    List_for_ingredients.add(ingredients.optString(i));
                 }
 
                 //Put each string in the sandwich item
@@ -55,6 +55,7 @@ public class JsonUtils {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
 
         }
 
